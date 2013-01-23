@@ -54,6 +54,7 @@
     <Compile Include="Games\MoveTests.cs" />
     <Compile Include="Games\Selectors\TraditionalPlayerSelectorTests.cs" />
     <Compile Include="Player\ComputerPlayerTests.cs" />
+    <Compile Include="Rules\RulesComposerTests.cs" />
     <Compile Include="Support\FakeSubscriber.cs" />
     <Compile Include="Games\Grid\Grid3X3Tests.cs" />
     <Compile Include="Games\MarkTests.cs" />

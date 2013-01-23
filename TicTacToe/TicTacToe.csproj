@@ -123,6 +123,7 @@
     <Compile Include="Games\Move.cs" />
     <Compile Include="Games\Rules\RuleAssistant.cs" />
     <Compile Include="Games\Rules\IRuleAssistant.cs" />
+    <Compile Include="Games\Rules\RulesComposer.cs" />
     <Compile Include="Games\Rules\SlackAssistant.cs" />
     <Compile Include="Games\Selectors\PlayerSelectorContracts.cs" />
     <Compile Include="Games\Selectors\IPlayerSelector.cs" />
