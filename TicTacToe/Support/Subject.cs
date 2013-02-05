@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace TicTacToe.Support
@@ -22,17 +21,17 @@ namespace TicTacToe.Support
 
         protected async void Notify(TSubject subject)
         {
-            await Task.Run(() => _observers.AsParallel().ForAll(x => x.OnNext(subject)));
+            await Task.Run(() => Parallel.ForEach(_observers, (observer) => observer.OnNext(subject)));
         }
 
         protected async void NotifyError(Exception error)
         {
-            await Task.Run(() => _observers.AsParallel().ForAll(x => x.OnError(error)));
+            await Task.Run(() => Parallel.ForEach(_observers, (observer) => observer.OnError(error)));
         }
 
         protected async void NotifyCompleted()
         {
-            await Task.Run(() => _observers.AsParallel().ForAll(x => x.OnCompleted()));
+            await Task.Run(() => Parallel.ForEach(_observers, (observer) => observer.OnCompleted()));
         }
 
         #region Nested type: UnSubscriber
