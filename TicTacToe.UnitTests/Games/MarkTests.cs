@@ -14,10 +14,10 @@ namespace TicTacToe.UnitTests.Games
         [TestCaseSource(typeof(TestCaseDataProvider), "Positions")]
         public void WhenMarkPosition_TheGridShouldGetUpdatedForTheSamePosition(IPosition position)
         {
-            var mock = new Mock<IGrid<IPosition>>();
-            mock.SetupSet(x => x[position] = Mark.Cross);
+            var mock = new Mock<IGrid>();
+            mock.Setup(x => x.Fill(position, Mark.Cross));
             Mark.Cross.On(mock.Object, position);
-            mock.Verify();
+            mock.Verify(x => x.Fill(position, Mark.Cross), Times.Once());
         }
 
         [Test]

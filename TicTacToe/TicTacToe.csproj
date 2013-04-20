@@ -111,6 +111,7 @@
     <Compile Include="Games\Game.cs" />
     <Compile Include="Games\GameStatus.cs" />
     <Compile Include="Games\Grid\GridContracts.cs" />
+    <Compile Include="Games\Grid\IGridRotator.cs" />
     <Compile Include="Games\Grid\PositionContracts.cs" />
     <Compile Include="Games\Grid\IRow.cs" />
     <Compile Include="Games\Grid\ThreePerThree\Rows3X3.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Games\Selectors\RandomPlayerSelector.cs" />
     <Compile Include="Games\Selectors\TraditionalPlayerSelector.cs" />
     <Compile Include="Games\StatusChangeException.cs" />
+    <Compile Include="Player\BasePlayer.cs" />
     <Compile Include="Player\ComputerPlayer.cs" />
     <Compile Include="Player\PlayerContracts.cs" />
     <Compile Include="Player\IPlayer.cs" />

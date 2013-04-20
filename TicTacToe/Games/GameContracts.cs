@@ -27,12 +27,15 @@ namespace TicTacToe.Games
 
         public abstract void Quit();
 
-        public abstract IReadOnlyList<Move> Moves { get; }
+        public abstract IGrid Grid { get; }
+
+        public abstract IEnumerable<Move> Moves { get; }
 
         [ContractInvariantMethod]
         private void ContractInvariants()
         {
             Contract.Invariant(Status != null, "Status cannot be null");
+            Contract.Invariant(Grid != null, "Grid cannot be null");
             Contract.Invariant(Moves != null, "Moves cannot be null");
         }
     }

@@ -61,6 +61,7 @@
     <Compile Include="Support\Data\TestCaseDataProvider.cs" />
     <Compile Include="Games\Grid\PositionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Support\Fakes\FakeGrid.cs" />
     <Compile Include="Support\Fakes\FakePosition.cs" />
   </ItemGroup>
   <ItemGroup>

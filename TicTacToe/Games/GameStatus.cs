@@ -3,7 +3,7 @@
     public class GameStatus
     {
         internal static readonly GameStatus New = new GameStatus();
-        private static readonly GameStatus Started = new GameStatus(true, false);
+        private static readonly GameStatus Started = new GameStatus(true);
         private static readonly GameStatus Over = new GameStatus(false, true);
 
         private readonly bool _started;

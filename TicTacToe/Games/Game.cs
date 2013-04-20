@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TicTacToe.Games.Grid.ThreePerThree;
 using TicTacToe.Games.Grid;
+using TicTacToe.Games.Grid.ThreePerThree;
 using TicTacToe.Games.Rules;
-using TicTacToe.Player;
 using TicTacToe.Support;
 
 namespace TicTacToe.Games
@@ -12,12 +11,13 @@ namespace TicTacToe.Games
     internal class Game : Subject<IGame>, IGame
     {
         private readonly object _pencil = new object();
-        private readonly Grid3X3 _grid;
+        
+        private IGrid _grid;
         private IRuleAssistant _assistant;
 
         private readonly List<Move> _moves = new List<Move>(9);  
 
-        public Game(Grid3X3 grid)
+        public Game(IGrid grid)
         {
             EnsuresGridIsNotNull(grid);
             _grid = grid;
@@ -68,7 +68,7 @@ namespace TicTacToe.Games
 
                     var move = new Move(mark, position);
                     _assistant.AcceptMove(move);
-                    mark.On(_grid, position as Positions3X3);
+                    _grid = mark.On(_grid, position);
                     _moves.Add(move);
 
                     CheckWhetherThereAreCompletedRows();
@@ -91,7 +91,9 @@ namespace TicTacToe.Games
             }
         }
 
-        public IReadOnlyList<Move> Moves 
+        public virtual IGrid Grid { get { return _grid; } }
+
+        public virtual IEnumerable<Move> Moves 
         { 
             get { return _moves.AsReadOnly(); }
         }
@@ -102,7 +104,7 @@ namespace TicTacToe.Games
                 throw new GameNotStartedException();
         }
 
-        private static void EnsuresGridIsNotNull(Grid3X3 grid)
+        private static void EnsuresGridIsNotNull(IGrid grid)
         {
             if (grid == null)
                 throw new ArgumentNullException("grid");
@@ -110,7 +112,7 @@ namespace TicTacToe.Games
 
         private void EnsuresPositionsIsNotFilled(IPosition position)
         {
-            if (_grid.IsFilled(position as Positions3X3))
+            if (_grid.IsFilled(position))
                 throw new FilledPositionException();
         }
 

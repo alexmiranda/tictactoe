@@ -12,16 +12,18 @@ namespace TicTacToe.Games
 
     internal static class Marks
     {
-        internal static void On<T>(this Mark mark, IGrid<T> grid, T position) where T : IPosition
+        internal static IGrid On<T>(this Mark mark, IGrid grid, T position) where T : IPosition
         {
-            if (grid != null && position != null) grid[position] = mark;
+            if (grid != null && position != null) 
+                return grid.Fill(position, mark);
+            return grid;
         }
 
         internal static Mark Switch(this Mark mark)
         {
             if (mark == Mark.Cross)
                 return Mark.Nought;
-            else if (mark == Mark.Nought)
+            if (mark == Mark.Nought)
                 return Mark.Cross;
             throw new InvalidOperationException("Cannot switch from Blank");
         }

@@ -11,7 +11,7 @@ namespace TicTacToe.UnitTests.Games.Grid
     [TestFixture]
     public class Grid3X3Tests
     {
-        private Grid3X3 _grid;
+        private IGrid _grid;
 
         [SetUp]
         public void InitialiseFixture()
@@ -49,14 +49,14 @@ namespace TicTacToe.UnitTests.Games.Grid
         [TestCaseSource(typeof(TestCaseDataProvider), "Marks")]
         public void ItShouldNotAcceptMarkNull(Mark mark)
         {
-            Assert.Throws<ArgumentNullException>(() => _grid[null] = mark);
+            Assert.Throws<ArgumentNullException>(() => _grid.Fill(null, mark));
         }
 
         [Test]
         [TestCaseSource(typeof(TestCaseDataProvider), "Positions")]
         public void WhenIMarkAPosition_ItShouldNotBeBlank(Positions3X3 position)
         {
-            Mark.Cross.On(_grid, position);
+            _grid = Mark.Cross.On(_grid, position);
             Assert.That(_grid.IsBlank(position), Is.False);
         }
 
@@ -64,18 +64,8 @@ namespace TicTacToe.UnitTests.Games.Grid
         [TestCaseSource(typeof(TestCaseDataProvider), "Positions")]
         public void WhenIMarkAPosition_ItShouldNotBeFilled(Positions3X3 position)
         {
-            Mark.Cross.On(_grid, position);
+            _grid = Mark.Cross.On(_grid, position);
             Assert.That(_grid.IsFilled(position), Is.True);
-        }
-
-        [Test]
-        public void WhenReset_ItShouldBeCompletelyBlank()
-        {
-            foreach (var position in AllPositions)
-                Mark.Cross.On(_grid, position);
-            _grid.Reset();
-            foreach (var position in AllPositions)
-                Assert.That(_grid[position], Is.EqualTo(Mark.Blank));
         }
 
         [Test]
@@ -83,7 +73,7 @@ namespace TicTacToe.UnitTests.Games.Grid
         public void CompletedRowsReturnsCorrectly(IRow row)
         {
             foreach (var position in row.Positions)
-                _grid[position as Positions3X3] = Mark.Cross;
+                _grid = _grid.Fill(position, Mark.Cross);
             var completedRows = _grid.CompletedRows();
             Assert.That(completedRows, Is.Not.Null);
             Assert.That(completedRows, Contains.Item(row));
